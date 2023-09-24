@@ -4,6 +4,12 @@
     {{widgets.header.html}}
     {{{end}}}
 </div>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script>
+   function onSubmit(token) {
+     document.getElementById("demo-form").submit();
+   }
+</script>
 <div class="row register">
     <div class="row {{{ if widgets.sidebar.length }}}col-lg-9 col-sm-12{{{ else }}}col-lg-12{{{ end }}}">
         <div class="{register_window:spansize}">
@@ -12,7 +18,7 @@
                     <strong>[[error:registration-error]]</strong>
                     <p>{error}</p>
                 </div>
-                <form component="register/local" class="form-horizontal" role="form" action="{config.relative_path}/register" method="post">
+                <form component="register/local" class="form-horizontal" role="form" action="{config.relative_path}/register" method="post" onsubmit="check_if_capcha_is_filled">
                     <div class="form-group">
                         <label for="username" class="col-lg-4 control-label">[[register:username]]</label>
                         <div class="col-lg-8">
@@ -51,7 +57,27 @@
 
                     <div class="form-group">
                         <div class="col-lg-offset-4 col-lg-8">
+                            <script src="https://www.google.com/recaptcha/api.js"></script>
+                            <script> 
+                                function onSubmit(token) { 
+                                    document.getElementById("demo-form").submit(); 
+                                } 
+                            </script> 
+                            <script src="https://www.google.com/recaptcha/api.js?render=6Lft5EsoAAAAAHb83nvzzFJTZA8yNPjqqf3HjmHT"></script>
+                                <script>
+                                var interval = setInterval(function(){
+                                if(window.grecaptcha){
+                                        grecaptcha.ready(function() {
+                                            grecaptcha.execute('6Lft5EsoAAAAAHb83nvzzFJTZA8yNPjqqf3HjmHT', {action: 'homepage'}).then(function(token) {
+                                            $('#i-recaptcha').prepend('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
+                                            });
+                                        });
+                                    clearInterval(interval);
+                                }
+                                }, 100);
+                                </script>
                             <button class="btn btn-primary btn-lg btn-block" id="register" type="submit">[[register:register_now_button]]</button>
+                            <div class="g-recaptcha" data-callback="capcha_filled" data-expired-callback="capcha_expired" data-sitekey="6Lft5EsoAAAAAHb83nvzzFJTZA8yNPjqqf3HjmHT"></div>
                         </div>
                     </div>
                     <input id="token" type="hidden" name="token" value="" />

@@ -7,22 +7,22 @@ define('forum/register', [
     const Register = {};
     let validationError = false;
     const successIcon = '';
-
+    var allowSubmit = false;
+    const form = document.querySelector('form');
     Register.init = function () {
         const username = $('#username');
         const password = $('#password');
         const password_confirm = $('#password-confirm');
         const register = $('#register');
-
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+        });
         handleLanguageOverride();
-
         $('#content #noscript').val('false');
-
         const query = utils.params();
         if (query.token) {
             $('#token').val(query.token);
         }
-
         // Update the "others can mention you via" text
         username.on('keyup', function () {
             $('#yourUsername').text(this.value.length > 0 ? slugify(this.value) : 'username');
@@ -62,7 +62,7 @@ define('forum/register', [
             errorEl.addClass('hidden');
             e.preventDefault();
             validateForm(function () {
-                if (validationError) {
+                if (validationError || !allowSubmit) {
                     return;
                 }
 
@@ -207,3 +207,4 @@ define('forum/register', [
 
     return Register;
 });
+
