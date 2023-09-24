@@ -56,9 +56,9 @@ define('forum/register', [
         Login.capsLockCheck(document.querySelector('#password'), document.querySelector('#caps-lock-warning'));
 
         function check() {
-            if (grecaptcha.getResponse() == "") {
-                alert("Please verify captcha details.");
-                    return false;
+            if (grecaptcha.getResponse() === '') {
+                alert('Please verify captcha details.');
+                return false;
             }
             return true;
         }
@@ -70,7 +70,6 @@ define('forum/register', [
             e.preventDefault();
             validateForm(function () {
                 if (validationError || !check()) {
-
                     return;
                 }
 
