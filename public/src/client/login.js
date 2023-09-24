@@ -6,6 +6,14 @@ define('forum/login', ['hooks', 'translator', 'jquery-form'], function (hooks, t
         _capsState: false,
     };
 
+    function check() {
+        if (grecaptcha.getResponse() == "") {
+            alert("Please verify captcha details.");
+                return false;
+        }
+        return true;
+    }
+
     Login.init = function () {
         const errorEl = $('#login-error-notify');
         const submitEl = $('#login');
@@ -17,6 +25,9 @@ define('forum/login', ['hooks', 'translator', 'jquery-form'], function (hooks, t
             if (!$('#username').val() || !$('#password').val()) {
                 errorEl.find('p').translateText('[[error:invalid-username-or-password]]');
                 errorEl.show();
+            } else if (!check()){
+                return;
+
             } else {
                 errorEl.hide();
 

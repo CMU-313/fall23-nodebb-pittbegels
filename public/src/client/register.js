@@ -7,7 +7,6 @@ define('forum/register', [
     const Register = {};
     let validationError = false;
     const successIcon = '';
-    var allowSubmit = false;
     const form = document.querySelector('form');
     Register.init = function () {
         const username = $('#username');
@@ -56,13 +55,22 @@ define('forum/register', [
         // Guard against caps lock
         Login.capsLockCheck(document.querySelector('#password'), document.querySelector('#caps-lock-warning'));
 
+        function check() {
+            if (grecaptcha.getResponse() == "") {
+                alert("Please verify captcha details.");
+                    return false;
+            }
+            return true;
+        }
+
         register.on('click', function (e) {
             const registerBtn = $(this);
             const errorEl = $('#register-error-notify');
             errorEl.addClass('hidden');
             e.preventDefault();
             validateForm(function () {
-                if (validationError || !allowSubmit) {
+                if (validationError || !check()) {
+
                     return;
                 }
 

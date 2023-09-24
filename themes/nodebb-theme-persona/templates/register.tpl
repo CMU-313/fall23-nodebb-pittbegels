@@ -18,7 +18,7 @@
                     <strong>[[error:registration-error]]</strong>
                     <p>{error}</p>
                 </div>
-                <form component="register/local" class="form-horizontal" role="form" action="{config.relative_path}/register" method="post" onsubmit="check_if_capcha_is_filled">
+                <form component="register/local" class="form-horizontal" role="form" action="{config.relative_path}/register" method="post" onsubmit="return check()">
                     <div class="form-group">
                         <label for="username" class="col-lg-4 control-label">[[register:username]]</label>
                         <div class="col-lg-8">
