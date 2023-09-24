@@ -8,59 +8,21 @@ define('forum/register', [
     let validationError = false;
     const successIcon = '';
     var allowSubmit = false;
-    
-    function capcha_filled () {
-        allowSubmit = true;
-    }
-    function capcha_expired () {
-        allowSubmit = false;
-    }
-
-    function check_if_capcha_is_filled (e) {
-        if(!allowSubmit){
-            e.preventDefault();
-            throw new Error('Fill in Captcha');
-        }
-    }
-
+    const form = document.querySelector('form');
     Register.init = function () {
         const username = $('#username');
         const password = $('#password');
         const password_confirm = $('#password-confirm');
         const register = $('#register');
-        const form = document.querySelector('form');
-
-        form.addEventListener('submit', (e)=>{
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
-            const captchaResponse = grecaptcha.getResponse();
-            if(captchaResponse.length <= 0){
-                showError(username, "Please fill in capcha");
-                throw new Error ("Captcha not complete");
-                return;
-            }
-        })
-        const captchaResponse = grecaptcha.getResponse();
-            if(!captchaResponse.length > 0){
-                showError(username, "Please fill in capcha");
-                throw new Error ("Captcha not complete");
-                return;
-            }
+        });
         handleLanguageOverride();
-
         $('#content #noscript').val('false');
-
         const query = utils.params();
         if (query.token) {
             $('#token').val(query.token);
         }
-        function check_if_capcha_is_filled (e) {
-            if(!allowSubmit){
-                e.preventDefault();
-                throw new Error('Fill in Captcha');
-                return;
-            }
-        }
-
         // Update the "others can mention you via" text
         username.on('keyup', function () {
             $('#yourUsername').text(this.value.length > 0 ? slugify(this.value) : 'username');

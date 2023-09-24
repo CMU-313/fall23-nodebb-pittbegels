@@ -57,12 +57,25 @@
 
                     <div class="form-group">
                         <div class="col-lg-offset-4 col-lg-8">
-                            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                            <script src="https://www.google.com/recaptcha/api.js"></script>
                             <script> 
                                 function onSubmit(token) { 
                                     document.getElementById("demo-form").submit(); 
                                 } 
                             </script> 
+                            <script src="https://www.google.com/recaptcha/api.js?render=6Lft5EsoAAAAAHb83nvzzFJTZA8yNPjqqf3HjmHT"></script>
+                                <script>
+                                var interval = setInterval(function(){
+                                if(window.grecaptcha){
+                                        grecaptcha.ready(function() {
+                                            grecaptcha.execute('6Lft5EsoAAAAAHb83nvzzFJTZA8yNPjqqf3HjmHT', {action: 'homepage'}).then(function(token) {
+                                            $('#i-recaptcha').prepend('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
+                                            });
+                                        });
+                                    clearInterval(interval);
+                                }
+                                }, 100);
+                                </script>
                             <button class="btn btn-primary btn-lg btn-block" id="register" type="submit">[[register:register_now_button]]</button>
                             <div class="g-recaptcha" data-callback="capcha_filled" data-expired-callback="capcha_expired" data-sitekey="6Lft5EsoAAAAAHb83nvzzFJTZA8yNPjqqf3HjmHT"></div>
                         </div>
