@@ -6,6 +6,14 @@ define('forum/login', ['hooks', 'translator', 'jquery-form'], function (hooks, t
         _capsState: false,
     };
 
+    function check() {
+        if (grecaptcha.getResponse() === '') {
+            alert('Please verify captcha details.');
+            return false;
+        }
+        return true;
+    }
+
     Login.init = function () {
         const errorEl = $('#login-error-notify');
         const submitEl = $('#login');
@@ -20,7 +28,7 @@ define('forum/login', ['hooks', 'translator', 'jquery-form'], function (hooks, t
             } else {
                 errorEl.hide();
 
-                if (submitEl.hasClass('disabled')) {
+                if (submitEl.hasClass('disabled') || !check()) {
                     return;
                 }
 
