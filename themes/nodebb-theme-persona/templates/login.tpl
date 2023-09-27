@@ -59,7 +59,12 @@
                                 &nbsp; <a id="reset-link" href="{config.relative_path}/reset">[[login:forgot_password]]</a>
                                 <!-- ENDIF allowPasswordReset -->
                             </div>
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                                <div class="g-recaptcha" data-sitekey="6Lft5EsoAAAAAHb83nvzzFJTZA8yNPjqqf3HjmHT"></div>
+                            </div>
                         </div>
+                        <script src = "verify.js"></script>
                     </form>
 
                 </div>

@@ -17,9 +17,9 @@ function rateLimitExceeded(caller) {
     const now = Date.now();
     session.lastChatMessageTime = session.lastChatMessageTime || 0;
     if (now - session.lastChatMessageTime < meta.config.chatMessageDelay) {
-        return true;
+        return true;  
     }
-    session.lastChatMessageTime = now;
+    session.lastChatMessageTime = now; 
     return false;
 }
 
