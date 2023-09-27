@@ -14,7 +14,7 @@ define('forum/login', ['hooks', 'translator', 'jquery-form'], function (hooks, t
         if (typeof allowSubmit != Boolean) {
             throw new Error('argument must be a boolean');
           }
-        //check should return a boolean
+        //check function should return a boolean
         const result1 = check();
         if (typeof result1 !== 'boolean') {
             throw new Error('Function did not return a boolean');

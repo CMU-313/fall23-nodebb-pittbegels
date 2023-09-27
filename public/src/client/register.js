@@ -122,7 +122,7 @@ define('forum/register', [
         if (typeof grecaptcha != String) {
             throw new Error('argument must be a string');
           }
-        //check should return a boolean
+        //check function should return a boolean
         const result1 = check();
         if (typeof result1 === 'boolean') {
             console.log('Result is a boolean:', result1);}
