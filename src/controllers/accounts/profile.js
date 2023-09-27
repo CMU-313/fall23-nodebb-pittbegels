@@ -43,7 +43,8 @@ profileController.get = async function (req, res, next) {
     if (meta.config['reputation:disabled']) {
         delete userData.reputation;
     }
-
+ 
+    userData.isInstructor = userData.accounttype === 'instructor';
     userData.posts = latestPosts; // for backwards compat.
     userData.latestPosts = latestPosts;
     userData.bestPosts = bestPosts;
