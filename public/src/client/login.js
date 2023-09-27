@@ -7,13 +7,26 @@ define('forum/login', ['hooks', 'translator', 'jquery-form'], function (hooks, t
     };
 
     function check() {
+        //grecaptcha should be a string 
+        if (typeof grecaptcha != String) {
+            throw new Error('argument must be a string');
+          }
+        if (typeof allowSubmit != Boolean) {
+            throw new Error('argument must be a boolean');
+          }
+        //check should return a boolean
+        const result1 = check();
+        if (typeof result1 !== 'boolean') {
+            throw new Error('Function did not return a boolean');
+          }
         if (grecaptcha.getResponse() === '') {
             alert('Please verify captcha details.');
             return false;
         }
         return true;
     }
-
+    
+            
     Login.init = function () {
         const errorEl = $('#login-error-notify');
         const submitEl = $('#login');
