@@ -65,7 +65,7 @@
                     &bull; 
                     <a href="<!-- IF topics.user.userslug -->{config.relative_path}/user/{topics.user.userslug}<!-- ELSE -->#<!-- ENDIF topics.user.userslug -->">{topics.user.displayname}</a> 
                     &bull; 
-                    <small class="label group-label inline-block" style="color:#ffffff;background-color: #7aadff;">{topics.user.accounttype}</small>
+                    <small class="label group-label inline-block" style="color:#ffffff;background-color: <!-- IF topics.user.isInstructor -->#7aadff<!-- ELSE -->#ff7e79<!-- ENDIF topics.user.isInstructor -->;">{topics.user.accounttype}</small>
                 </small>
                 <small class="visible-xs-inline">
                     <!-- IF topics.teaser.timestamp -->

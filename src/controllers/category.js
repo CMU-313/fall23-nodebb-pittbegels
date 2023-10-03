@@ -139,6 +139,11 @@ categoryController.get = async function (req, res, next) {
 
     analytics.increment([`pageviews:byCid:${categoryData.cid}`]);
 
+    categoryData.topic = categoryData.topics.map((topic) => {
+        topic.user.isInstructor = topic.user.accounttype === 'instructor';
+        return topic;
+    });
+
     res.render('category', categoryData);
 };
 
