@@ -1357,6 +1357,53 @@ describe('Controllers', () => {
                 done();
             });
         });
+        
+        it('isInstructor should correspond to account type', (done) => {
+            request(`${nconf.get('url')}/api/user/foo`, (err, res, body) => {
+                assert.ifError(err);
+                assert.equal(res.statusCode, 200);
+                assert(body);
+                const user = JSON.parse(body)
+                if (user.accounttype === 'instructor') {
+                    assert.equal(user.isInstructor, true);
+                } else {
+                    assert.equal(user.isInstructor || false, false);
+                }
+                done();
+            });
+        });
+
+        it('topics.isInstructor should correspond to account type', (done) => {
+            request(`${nconf.get('url')}/api/user/foo/topics`, (err, res, body) => {
+                assert.ifError(err)
+                assert.equal(res.statusCode, 200);
+                assert(body);
+                const topicsUser = JSON.parse(body)
+                if (topicsUser.accounttype === 'instructor') {
+                    assert.equal(topicsUser.isInstructor, true);
+                } else {
+                    assert.equal(topicsUser.isInstructor || false, false);
+                }
+                done();
+            });
+        });
+
+        it('isInstructor should be the same as topics.isInstructor', (done) => {
+            request(`${nconf.get('url')}/api/user/foo`, (err, res, body) => {
+                assert.ifError(err)
+                assert.equal(res.statusCode, 200);
+                assert(body);
+                const user = JSON.parse(body)
+                request(`${nconf.get('url')}/api/user/foo/topics`, (err, res, body) => {
+                    assert.ifError(err)
+                    assert.equal(res.statusCode, 200);
+                    assert(body);
+                    const topicsUser = JSON.parse(body)
+                    assert.equal(user.isInstructor || false, topicsUser.isInstructor || false)
+                    done();
+                });
+            });
+        });
 
         it('should load /user/foo/posts', (done) => {
             request(`${nconf.get('url')}/api/user/foo/posts`, (err, res, body) => {

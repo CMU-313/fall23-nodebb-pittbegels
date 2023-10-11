@@ -585,6 +585,13 @@ describe('Topic\'s', () => {
                 }
             });
         });
+
+        it('topic.user.accounttype should always exist', async () => {
+            const ts = await topics.getTopicsByTids([newTopic.tid]);
+            ts.forEach(topic => {
+                assert(topic.user.accounttype)
+            });
+        });
     });
 
     describe('Title escaping', () => {
@@ -2433,6 +2440,7 @@ describe('Topic\'s', () => {
             });
         });
     });
+
 
     describe('topic merge', () => {
         let uid;
