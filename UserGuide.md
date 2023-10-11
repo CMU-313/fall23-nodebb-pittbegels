@@ -6,7 +6,7 @@ We've introduced a visible tag that appears in multiple locations, such as the p
 
 ### Profile View
 
-<img src="userGuideFiles/roleProfileView.png" alt="Profile View Role Identifier" width="500"/>
+<img src="userGuideFiles/roleProfileView.png" alt="Profile View Role Identifier" height="200"/>
 
 #### Tests for this Implementation:
 - [Test 1](https://github.com/CMU-313/fall23-nodebb-pittbegels/blob/3cef121efef15ec2617905e6287b2a358d3d7ee8/test/controllers.js#L1361)
