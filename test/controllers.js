@@ -1357,13 +1357,13 @@ describe('Controllers', () => {
                 done();
             });
         });
-        
+
         it('isInstructor should correspond to account type', (done) => {
             request(`${nconf.get('url')}/api/user/foo`, (err, res, body) => {
                 assert.ifError(err);
                 assert.equal(res.statusCode, 200);
                 assert(body);
-                const user = JSON.parse(body)
+                const user = JSON.parse(body);
                 if (user.accounttype === 'instructor') {
                     assert.equal(user.isInstructor, true);
                 } else {
@@ -1375,10 +1375,10 @@ describe('Controllers', () => {
 
         it('topics.isInstructor should correspond to account type', (done) => {
             request(`${nconf.get('url')}/api/user/foo/topics`, (err, res, body) => {
-                assert.ifError(err)
+                assert.ifError(err);
                 assert.equal(res.statusCode, 200);
                 assert(body);
-                const topicsUser = JSON.parse(body)
+                const topicsUser = JSON.parse(body);
                 if (topicsUser.accounttype === 'instructor') {
                     assert.equal(topicsUser.isInstructor, true);
                 } else {
@@ -1390,16 +1390,16 @@ describe('Controllers', () => {
 
         it('isInstructor should be the same as topics.isInstructor', (done) => {
             request(`${nconf.get('url')}/api/user/foo`, (err, res, body) => {
-                assert.ifError(err)
+                assert.ifError(err);
                 assert.equal(res.statusCode, 200);
                 assert(body);
-                const user = JSON.parse(body)
+                const user = JSON.parse(body);
                 request(`${nconf.get('url')}/api/user/foo/topics`, (err, res, body) => {
-                    assert.ifError(err)
+                    assert.ifError(err);
                     assert.equal(res.statusCode, 200);
                     assert(body);
-                    const topicsUser = JSON.parse(body)
-                    assert.equal(user.isInstructor || false, topicsUser.isInstructor || false)
+                    const topicsUser = JSON.parse(body);
+                    assert.equal(user.isInstructor || false, topicsUser.isInstructor || false);
                     done();
                 });
             });
