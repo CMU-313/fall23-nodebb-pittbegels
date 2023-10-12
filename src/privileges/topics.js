@@ -27,7 +27,7 @@ privsTopics.get = async function (tid, uid) {
         user.isAdministrator(uid),
         user.isModerator(uid, topicData.cid),
         categories.getCategoryField(topicData.cid, 'disabled'),
-        user.isInstructor(uid)
+        user.isInstructor(uid),
     ]);
     const privData = _.zipObject(privs, userPrivileges);
     const isOwner = uid > 0 && uid === topicData.uid;

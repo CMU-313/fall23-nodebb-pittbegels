@@ -138,11 +138,10 @@ User.getUsernameByEmail = async function (email) {
 
 User.isInstructor = async function (uid) {
     const account = User.getUserField(uid, 'accounttype');
-    if (String(account).toLowerCase() === "instructor") {
+    if (String(account).toLowerCase() === 'instructor') {
         return true;
-    } else {
-        return false;
     }
+    return false;
 };
 
 User.isModerator = async function (uid, cid) {
