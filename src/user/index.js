@@ -136,6 +136,15 @@ User.getUsernameByEmail = async function (email) {
     return await User.getUserField(uid, 'username');
 };
 
+User.isInstructor = async function (uid) {
+    const account = User.getUserField(uid, 'accounttype');
+    if (String(account).toLowerCase() === "instructor") {
+        return true;
+    } else {
+        return false;
+    }
+};
+
 User.isModerator = async function (uid, cid) {
     return await privileges.users.isModerator(uid, cid);
 };

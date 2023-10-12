@@ -22,17 +22,18 @@ privsTopics.get = async function (tid, uid) {
         'posts:delete', 'posts:view_deleted', 'read', 'purge',
     ];
     const topicData = await topics.getTopicFields(tid, ['cid', 'uid', 'locked', 'deleted', 'scheduled']);
-    const [userPrivileges, isAdministrator, isModerator, disabled] = await Promise.all([
+    const [userPrivileges, isAdministrator, isModerator, disabled, isInstruct] = await Promise.all([
         helpers.isAllowedTo(privs, uid, topicData.cid),
         user.isAdministrator(uid),
         user.isModerator(uid, topicData.cid),
         categories.getCategoryField(topicData.cid, 'disabled'),
+        user.isInstructor(uid)
     ]);
     const privData = _.zipObject(privs, userPrivileges);
     const isOwner = uid > 0 && uid === topicData.uid;
     const isAdminOrMod = isAdministrator || isModerator;
     const editable = isAdminOrMod;
-    const deletable = (privData['topics:delete'] && (isOwner || isModerator)) || isAdministrator;
+    const deletable = (privData['topics:delete'] && (isOwner || isModerator)) || isAdministrator || isInstruct;
     const mayReply = privsTopics.canViewDeletedScheduled(topicData, {}, false, privData['topics:schedule']);
 
     return await plugins.hooks.fire('filter:privileges.topics.get', {
@@ -40,7 +41,7 @@ privsTopics.get = async function (tid, uid) {
         'topics:read': privData['topics:read'] || isAdministrator,
         'topics:schedule': privData['topics:schedule'] || isAdministrator,
         'topics:tag': privData['topics:tag'] || isAdministrator,
-        'topics:delete': (privData['topics:delete'] && (isOwner || isModerator)) || isAdministrator,
+        'topics:delete': (privData['topics:delete'] && (isOwner || isModerator)) || isAdministrator || isInstruct,
         'posts:edit': (privData['posts:edit'] && (!topicData.locked || isModerator)) || isAdministrator,
         'posts:history': privData['posts:history'] || isAdministrator,
         'posts:delete': (privData['posts:delete'] && (!topicData.locked || isModerator)) || isAdministrator,
