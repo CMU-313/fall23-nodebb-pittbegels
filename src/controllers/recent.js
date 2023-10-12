@@ -117,6 +117,10 @@ const get = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     if (!data) {
         return next();
     }
+    data.topics = data.topics.map((topic) => {
+        topic.user.isInstructor = topic.user.accounttype === 'instructor';
+        return topic;
+    });
     res.render('recent', data);
 });
 exports.get = get;

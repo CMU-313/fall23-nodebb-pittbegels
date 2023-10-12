@@ -15,17 +15,20 @@
         </div>
         <!-- ENDIF banned -->
         <!-- ENDIF isAdminOrGlobalModeratorOrModerator -->
-
-        <!-- IF selectedGroup.length -->
+        
+        <!-- IF isTargetAdmin -->
         <div class="text-center">
-        {{{each selectedGroup}}}
-        <!-- IF selectedGroup.slug -->
-            <a href="{config.relative_path}/groups/{selectedGroup.slug}"><small class="label group-label inline-block" style="color:{selectedGroup.textColor};background-color: {selectedGroup.labelColor};"><!-- IF selectedGroup.icon --><i class="fa {selectedGroup.icon}"></i> <!-- ENDIF selectedGroup.icon -->{selectedGroup.userTitle}</small></a>
-        <!-- ENDIF selectedGroup.slug -->
-        {{{end}}}
+            <small class="label group-label inline-block" style="color: #ffffff; background-color: #000000;">Admin</small>
         </div>
+        <!-- ELSE -->
+        <div class="text-center">
+            <small class="label group-label inline-block" style="color: #ffffff; background-color: <!-- IF isInstructor -->#7aadff<!-- ELSE -->#ff7e79<!-- ENDIF isInstructor -->;">
+                {accounttype}
+            </small>
+        </div>
+        <!-- ENDIF isTargetAdmin -->
+        
         <br/>
-        <!-- ENDIF selectedGroup.length -->
 
         <!-- IF aboutme -->
         <span component="aboutme" class="text-center aboutme">{aboutmeParsed}</span>

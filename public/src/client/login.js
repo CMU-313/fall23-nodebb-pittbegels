@@ -6,6 +6,29 @@ define('forum/login', ['hooks', 'translator', 'jquery-form'], function (hooks, t
         _capsState: false,
     };
 
+    function check() {
+        //grecaptcha should be a string 
+        if (typeof grecaptcha != object) {
+            throw new Error('argument must be a string');
+          }
+        if (typeof allowSubmit != Boolean) {
+            throw new Error('argument must be a boolean');
+          }
+        
+        console.log(typeof grecaptcha);
+        if (grecaptcha.getResponse() === '') {
+            alert('Please verify captcha details.');
+            return false;
+        }
+        return true;
+    }
+    //check function should return a boolean
+    const result1 = check();
+    console.log(typeof check());
+    if (typeof result1 !== 'boolean') {
+        throw new Error('Function did not return a boolean');
+      }
+            
     Login.init = function () {
         const errorEl = $('#login-error-notify');
         const submitEl = $('#login');
@@ -20,7 +43,7 @@ define('forum/login', ['hooks', 'translator', 'jquery-form'], function (hooks, t
             } else {
                 errorEl.hide();
 
-                if (submitEl.hasClass('disabled')) {
+                if (submitEl.hasClass('disabled') || !check()) {
                     return;
                 }
 

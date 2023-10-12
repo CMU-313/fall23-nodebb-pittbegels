@@ -64,6 +64,11 @@ unreadController.get = async function (req, res) {
     data.filters = helpers.buildFilters(baseUrl, filter, req.query);
     data.selectedFilter = data.filters.find(filter => filter && filter.selected);
 
+    data.topic = data.topics.map((topic) => {
+        topic.user.isInstructor = topic.user.accounttype === 'instructor';
+        return topic;
+    });
+
     res.render('unread', data);
 };
 

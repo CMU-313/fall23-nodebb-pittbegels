@@ -44,6 +44,7 @@ profileController.get = async function (req, res, next) {
         delete userData.reputation;
     }
 
+    userData.isInstructor = userData.accounttype === 'instructor';
     userData.posts = latestPosts; // for backwards compat.
     userData.latestPosts = latestPosts;
     userData.bestPosts = bestPosts;

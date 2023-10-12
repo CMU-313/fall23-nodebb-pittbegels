@@ -47,7 +47,7 @@
 
                 <!-- IF !template.category -->
                 <small>
-                    <a href="{config.relative_path}/category/{topics.category.slug}"><span class="fa-stack fa-lg" style="{function.generateCategoryBackground, topics.category}"><i style="color:{topics.category.color};" class="fa {topics.category.icon} fa-stack-1x"></i></span> {topics.category.name}</a> &bull;
+                    <a href="{config.relative_path}/category/{topics.category.slug}"><span class="fa-stack fa-lg" style="{function.generateCategoryBackground, topics.category}"><i style="color:{topics.category.color};" class="fa {topics.category.icon} fa-stack-1x"></i></span> {topics.category.name}</a>;
                 </small>
                 <!-- ENDIF !template.category -->
 
@@ -60,7 +60,13 @@
                 </span>
                 {{{ end }}}
 
-                <small class="hidden-xs"><span class="timeago" title="{topics.timestampISO}"></span> &bull; <a href="<!-- IF topics.user.userslug -->{config.relative_path}/user/{topics.user.userslug}<!-- ELSE -->#<!-- ENDIF topics.user.userslug -->">{topics.user.displayname}</a></small>
+                <small class="hidden-xs">
+                    <span class="timeago" title="{topics.timestampISO}"></span> 
+                    &bull; 
+                    <a href="<!-- IF topics.user.userslug -->{config.relative_path}/user/{topics.user.userslug}<!-- ELSE -->#<!-- ENDIF topics.user.userslug -->">{topics.user.displayname}</a> 
+                    &bull; 
+                    <small class="label group-label inline-block" style="color:#ffffff;background-color: <!-- IF topics.user.isInstructor -->#7aadff<!-- ELSE -->#ff7e79<!-- ENDIF topics.user.isInstructor -->;">{topics.user.accounttype}</small>
+                </small>
                 <small class="visible-xs-inline">
                     <!-- IF topics.teaser.timestamp -->
                     <span class="timeago" title="{topics.teaser.timestampISO}"></span>

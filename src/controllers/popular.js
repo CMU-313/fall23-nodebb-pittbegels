@@ -26,5 +26,11 @@ popularController.get = async function (req, res, next) {
     if (req.loggedIn) {
         data.rssFeedUrl += `?${feedQs}`;
     }
+
+    data.topic = data.topics.map((topic) => {
+        topic.user.isInstructor = topic.user.accounttype === 'instructor';
+        return topic;
+    });
+
     res.render('popular', data);
 };
