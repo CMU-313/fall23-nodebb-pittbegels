@@ -33,6 +33,7 @@ describe('Topic\'s', () => {
     let topic;
     let categoryObj;
     let adminUid;
+    // let instructUid;
     let adminJar;
     let csrf_token;
     let fooUid;
@@ -40,6 +41,7 @@ describe('Topic\'s', () => {
     before(async () => {
         adminUid = await User.create({ username: 'admin', password: '123456' });
         fooUid = await User.create({ username: 'foo' });
+        // instructUid = await User.create({ username: 'instructor', password: '1234567', accounttype: 'instructor'})
         await groups.join('administrators', adminUid);
         const adminLogin = await helpers.loginUser('admin', '123456');
         adminJar = adminLogin.jar;
@@ -660,11 +662,18 @@ describe('Topic\'s', () => {
             assert.strictEqual(deleted, 1);
         });
 
+
         it('should restore the topic', async () => {
             await apiTopics.restore({ uid: adminUid }, { tids: [newTopic.tid], cid: categoryObj.cid });
             const deleted = await topics.getTopicField(newTopic.tid, 'deleted');
             assert.strictEqual(deleted, 0);
         });
+
+        // it('should delete the topic if user is instructor', async () => {
+        //     await apiTopics.delete({ uid: instructUid }, { tids: [newTopic.tid], cid: categoryObj.cid });
+        //     const deleted = await topics.getTopicField(newTopic.tid, 'deleted');
+        //     assert.strictEqual(deleted, 1);
+        // });
 
         it('should lock topic', async () => {
             await apiTopics.lock({ uid: adminUid }, { tids: [newTopic.tid], cid: categoryObj.cid });
