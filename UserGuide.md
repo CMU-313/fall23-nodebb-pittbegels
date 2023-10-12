@@ -22,4 +22,12 @@ We've introduced a visible tag that appears in multiple locations, such as the p
 
 ## Recaptcha
 
-*This section will be updated once the Recaptcha feature is implemented.*
+We've also introduced the Google captcha into multiple pages, including Log-in and Register. This prevents bots and other spam accounts from joining.
+
+### Register View
+
+<img src="userGuideFiles/RegisterCaptcha.png" width="500">
+
+### Log-in View
+
+<img src="userGuideFiles/LogInCaptcha.png" width="500">
