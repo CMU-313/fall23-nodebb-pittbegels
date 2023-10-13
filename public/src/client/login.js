@@ -5,31 +5,32 @@ define('forum/login', ['hooks', 'translator', 'jquery-form'], function (hooks, t
     const Login = {
         _capsState: false,
     };
-    
-    /**
- * Check if a CAPTCHA response is valid.
- *
- * @returns {boolean} Returns `true` if the CAPTCHA response is valid, or `false` if it's not.
- */
+
     function check() {
-        /**
-     * @type {Object} grecaptcha
-     * The global `grecaptcha` object provided by the reCAPTCHA library.
-     */
-         // Ensure the `grecaptcha` object is defined
-    if (typeof grecaptcha === 'undefined') {
-        console.error('The `grecaptcha` object is not defined. Make sure to include the reCAPTCHA library.');
-        return false;
-    }
-         console.log(typeof grecaptcha);
+        // grecaptcha should be a string
+        // eslint-disable-next-line valid-typeof
+        if (typeof grecaptcha !== String) {
+            throw new Error('argument must be a string');
+        }
+        // eslint-disable-next-line valid-typeof
+        if (typeof allowSubmit !== Boolean) {
+            throw new Error('argument must be a boolean');
+        }
+        console.log(typeof grecaptcha);
+        // eslint-disable-next-line no-undef
         if (grecaptcha.getResponse() === '') {
+            // eslint-disable-next-line no-alert
             alert('Please verify captcha details.');
             return false;
         }
         return true;
     }
- 
-            
+    // check function should return a boolean
+    const result1 = check();
+    console.log(typeof check());
+    if (typeof result1 !== 'boolean') {
+        throw new Error('Function did not return a boolean');
+    }
     Login.init = function () {
         const errorEl = $('#login-error-notify');
         const submitEl = $('#login');

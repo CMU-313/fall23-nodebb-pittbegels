@@ -135,6 +135,14 @@ User.getUsernameByEmail = async function (email) {
     const uid = await db.sortedSetScore('email:uid', String(email).toLowerCase());
     return await User.getUserField(uid, 'username');
 };
+// This function defines a user type being an instructor
+User.isInstructor = async function (uid) {
+    const account = User.getUserField(uid, 'accounttype');
+    if (String(account).toLowerCase() === 'instructor') {
+        return true;
+    }
+    return false;
+};
 
 User.isModerator = async function (uid, cid) {
     return await privileges.users.isModerator(uid, cid);

@@ -7,26 +7,23 @@ define('forum/register', [
     const Register = {};
     let validationError = false;
     const successIcon = '';
-   // var allowSubmit = false; // boolean 
-    
-    
-    function capcha_filled () {
+    // var allowSubmit = false; // boolean
+    /* function capcha_filled () {
         //assert that allowSubmit is a boolean
         if (typeof allowSubmit != Boolean) {
             throw new Error('argument must be a boolean');
           }
-          
         allowSubmit = true;
-    }
-    function capcha_expired () {
+    } */
+    /* function capcha_expired () {
          //assert that allowSubmit is a boolean
          if (typeof allowSubmit != Boolean) {
             throw new Error('argument must be a boolean');
           }
         allowSubmit = false;
-    }
+    } */
 
-    function check_if_capcha_is_filled (e) {
+    /* function check_if_capcha_is_filled (e) {
         //assert that allowSubmit is a boolean
         if (typeof allowSubmit != Boolean) {
             throw new Error('argument must be a boolean');
@@ -35,42 +32,41 @@ define('forum/register', [
             e.preventDefault();
             throw new Error('Fill in Captcha');
         }
-    }
-   
+    } */
     Register.init = function () {
         const username = $('#username');
         const password = $('#password');
         const password_confirm = $('#password-confirm');
         const register = $('#register');
         const form = document.querySelector('form'); // HTMLFormElement
-        //assert that form is a HTMLFormElement
-        if (typeof form != HTMLFormElement) {
-        throw new Error('argument must be a boolean');
-  }
-        form.addEventListener('submit', (e)=>{
+        // assert that form is a HTMLFormElement
+        // eslint-disable-next-line valid-typeof
+        if (typeof form !== HTMLFormElement) {
+            throw new Error('argument must be a boolean');
+        }
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
-            const captchaResponse = grecaptcha.getResponse(); 
-            if(captchaResponse.length <= 0){
-                showError(username, "Please fill in capcha");
-                throw new Error ("Captcha not complete");
-                return;
+            // eslint-disable-next-line no-undef
+            const captchaResponse = grecaptcha.getResponse();
+            if (captchaResponse.length <= 0) {
+                showError(username, 'Please fill in capcha');
+                throw new Error('Captcha not complete');
             }
-        })
-        const captchaResponse = grecaptcha.getResponse(); // String 
-            if(!captchaResponse.length > 0){
-                showError(username, "Please fill in capcha");
-                throw new Error ("Captcha not complete");
-                return;
-            }
+        });
+        // eslint-disable-next-line no-undef
+        const captchaResponse = grecaptcha.getResponse(); // String
+        if (!captchaResponse.length > 0) {
+            showError(username, 'Please fill in capcha');
+            throw new Error('Captcha not complete');
+        }
         handleLanguageOverride();
-
         $('#content #noscript').val('false');
 
         const query = utils.params();
         if (query.token) {
-            $('#token').val(query.token);   
+            $('#token').val(query.token);
         }
-        function check_if_capcha_is_filled (e) {
+        /* function check_if_capcha_is_filled (e) {
         //assert that allowSubmit is a boolean
         if (typeof allowSubmit !== Boolean) {
             throw new Error('argument must be a boolean');
@@ -80,11 +76,12 @@ define('forum/register', [
                 throw new Error('Fill in Captcha');
                 return;
             }
-        }
-         //assert that allowSubmit is a boolean
-         if (typeof allowSubmit != Boolean) {
+        } */
+        // assert that allowSubmit is a boolean
+        // eslint-disable-next-line valid-typeof
+        if (typeof allowSubmit !== Boolean) {
             throw new Error('argument must be a boolean');
-          }
+        }
         // Update the "others can mention you via" text
         username.on('keyup', function () {
             $('#yourUsername').text(this.value.length > 0 ? slugify(this.value) : 'username');
@@ -118,24 +115,26 @@ define('forum/register', [
         // Guard against caps lock
         Login.capsLockCheck(document.querySelector('#password'), document.querySelector('#caps-lock-warning'));
         function check() {
-        //grecaptcha should be a string 
-        if (typeof grecaptcha != String) {
-            throw new Error('argument must be a string');
-          }
-        //check function should return a boolean
-        const result1 = check();
-        if (typeof result1 === 'boolean') {
-            console.log('Result is a boolean:', result1);}
-        else {
-            console.error('Assertion failed: Result is not a boolean.');
-        }
+            // grecaptcha should be a string
+            // eslint-disable-next-line valid-typeof
+            if (typeof grecaptcha !== String) {
+                throw new Error('argument must be a string');
+            }
+            // check function should return a boolean
+            const result1 = check();
+            if (typeof result1 === 'boolean') {
+                console.log('Result is a boolean:', result1);
+            } else {
+                console.error('Assertion failed: Result is not a boolean.');
+            }
+            // eslint-disable-next-line no-undef
             if (grecaptcha.getResponse() === '') {
+                // eslint-disable-next-line no-alert
                 alert('Please verify captcha details.');
                 return false;
             }
             return true;
         }
-        
         register.on('click', function (e) {
             const registerBtn = $(this);
             const errorEl = $('#register-error-notify');
