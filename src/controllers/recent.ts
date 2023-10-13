@@ -155,5 +155,11 @@ export const get = async (req: RecentRequest, res: Response<object, Locals>, nex
     if (!data) {
         return next();
     }
+
+    data.topics = data.topics.map((topic) => {
+        topic.user.isInstructor = topic.user.accounttype === 'instructor';
+        return topic;
+    });
+
     res.render('recent', data);
 };
