@@ -23,6 +23,7 @@ export type UserObjectSlim = {
   lastonlineISO: string;
   banned_until: number;
   banned_until_readable: string;
+  isInstructor: boolean;
 };
 
 export type UserObjectACP = UserObjectSlim & {
