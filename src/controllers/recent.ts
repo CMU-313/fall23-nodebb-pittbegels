@@ -13,7 +13,7 @@ import { Breadcrumbs, Pagination, TopicObject } from '../types';
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const relative_path: string = nconf.get('relative_path');
 
-interface RecentRequest extends Request {
+export interface RecentRequest extends Request {
   uid: number,
   loggedIn: boolean
 }
@@ -33,7 +33,7 @@ type TermType = {
     term: string,
 }
 
-type RecentDataType = {
+export type RecentDataType = {
     topics: TopicObject[],
     title: string,
     breadcrumbs: Breadcrumbs,
