@@ -1,6 +1,7 @@
 'use strict';
 
 const request = require('request');
+// eslint-disable-next-line import/no-unresolved
 const requestAsync = require('request-promise-native');
 const nconf = require('nconf');
 const fs = require('fs');

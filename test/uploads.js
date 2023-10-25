@@ -6,6 +6,7 @@ const nconf = require('nconf');
 const path = require('path');
 const fs = require('fs').promises;
 const request = require('request');
+// eslint-disable-next-line import/no-unresolved
 const requestAsync = require('request-promise-native');
 const util = require('util');
 

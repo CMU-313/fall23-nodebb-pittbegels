@@ -78,7 +78,6 @@ const get = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         topic.user.isInstructor = topic.user.accounttype === 'instructor';
         return topic;
     });
-
     res.render('unread', data);
 });
 exports.get = get;

@@ -1,6 +1,7 @@
 'use strict';
 
 const prompt = require('prompt');
+// eslint-disable-next-line import/no-unresolved
 const request = require('request-promise-native');
 const cproc = require('child_process');
 const semver = require('semver');

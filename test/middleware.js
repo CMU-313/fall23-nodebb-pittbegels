@@ -2,6 +2,7 @@
 
 const assert = require('assert');
 const nconf = require('nconf');
+// eslint-disable-next-line import/no-unresolved
 const request = require('request-promise-native');
 const db = require('./mocks/databasemock');
 

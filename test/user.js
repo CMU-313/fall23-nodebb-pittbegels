@@ -7,6 +7,7 @@ const path = require('path');
 const nconf = require('nconf');
 const validator = require('validator');
 const request = require('request');
+// eslint-disable-next-line import/no-unresolved
 const requestAsync = require('request-promise-native');
 const jwt = require('jsonwebtoken');
 

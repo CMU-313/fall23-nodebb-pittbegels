@@ -4,6 +4,7 @@ const async = require('async');
 const assert = require('assert');
 const nconf = require('nconf');
 const request = require('request');
+// eslint-disable-next-line import/no-unresolved
 const requestAsync = require('request-promise-native');
 const fs = require('fs');
 const path = require('path');

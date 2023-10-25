@@ -6,6 +6,7 @@ const winston = require('winston');
 const semver = require('semver');
 const nconf = require('nconf');
 const chalk = require('chalk');
+// eslint-disable-next-line import/no-unresolved
 const request = require('request-promise-native');
 
 const user = require('../user');

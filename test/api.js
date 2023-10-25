@@ -5,6 +5,7 @@ const assert = require('assert');
 const path = require('path');
 const fs = require('fs');
 const SwaggerParser = require('@apidevtools/swagger-parser');
+// eslint-disable-next-line import/no-unresolved
 const request = require('request-promise-native');
 const nconf = require('nconf');
 const jwt = require('jsonwebtoken');

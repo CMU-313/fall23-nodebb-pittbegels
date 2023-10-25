@@ -7,6 +7,7 @@ const nconf = require('nconf');
 const os = require('os');
 const cproc = require('child_process');
 const util = require('util');
+// eslint-disable-next-line import/no-unresolved
 const request = require('request-promise-native');
 
 const db = require('../database');

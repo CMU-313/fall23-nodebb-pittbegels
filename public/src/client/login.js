@@ -5,24 +5,24 @@ define('forum/login', ['hooks', 'translator', 'jquery-form'], function (hooks, t
     const Login = {
         _capsState: false,
     };
-    
+
     /**
      * Check if a CAPTCHA response is valid.
      *
      * @returns {boolean} Returns `true` if the CAPTCHA response is valid, or `false` if it's not.
      */
     function check() {
-
         /**
          * @type {Object} grecaptcha
          * The global `grecaptcha` object provided by the reCAPTCHA library.
          */
-         // Ensure the `grecaptcha` object is defined
+        // Ensure the `grecaptcha` object is defined
         if (typeof grecaptcha === 'undefined') {
             console.error('The `grecaptcha` object is not defined. Make sure to include the reCAPTCHA library.');
             return false;
         }
-      
+
+        // eslint-disable-next-line no-undef
         if (grecaptcha.getResponse() === '') {
             // eslint-disable-next-line no-alert
             alert('Please verify captcha details.');

@@ -206,13 +206,11 @@ const get = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         rel.href = `${url}/category/${categoryData.slug}${rel.href}`;
         res.locals.linkTags.push(rel);
     });
-
     analytics_1.default.increment([`pageviews:byCid:${categoryData.cid}`]);
     categoryData.topics = categoryData.topics.map((topic) => {
         topic.user.isInstructor = topic.user.accounttype === 'instructor';
         return topic;
     });
-
     res.render('category', categoryData);
 });
 exports.get = get;

@@ -2,6 +2,7 @@
 
 const assert = require('assert');
 const async = require('async');
+// eslint-disable-next-line import/no-unresolved
 const request = require('request-promise-native');
 const nconf = require('nconf');
 const util = require('util');
