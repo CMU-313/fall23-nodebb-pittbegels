@@ -86,11 +86,19 @@ jobs:
       - name: Display Base Branch Commit SHA
         id: base_branch_sha
         run: echo "Base Branch Commit SHA: ${{ steps.base_branch_commit.outputs.sha }}"
+
+      - name: Get Head Branch Commit SHA
+        id: head_branch_commit
+        run: echo "::set-output name=sha::$(git rev-parse HEAD)"
+
+      - name: Display Head Branch Commit SHA
+        id: head_branch_sha
+        run: echo "Head Branch Commit SHA: ${{ steps.head_branch_commit.outputs.sha }}"
       
       - name: Get list of Changed Files
         id: getfile
         run: |
-          files=$(git diff --name-only ${{ steps.base_branch_sha }} ${{ github.sha }})
+          files=$(git diff --name-only ${{ steps.base_branch_sha }} ${{ steps.head_branch_sha }})
           echo "::set-output name=files::$files"
       
       - name: Run Tool on Changed Files
