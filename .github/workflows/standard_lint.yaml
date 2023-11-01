@@ -79,19 +79,12 @@ jobs:
         run: |
           node app --setup="${SETUP}" --ci="${CI}"
 
-      - name: Get Base Branch Commit SHA
-        id: base_branch_commit
-        run: echo "::set-output name=sha::$(git rev-parse ${{ github.event.repository.default_branch }})"
-
-      - name: Get Head Branch Commit SHA
-        id: head_branch_commit
-        run: echo "::set-output name=sha::$(git rev-parse HEAD)"
-      
-      - name: Get list of Changed Files
-        id: getfile
-        run: |
-          files=$(git diff --name-only ${{ steps.base_branch_commit.outputs.sha }} ${{ steps.head_branch_commit.outputs.sha }})
-          echo "::set-output name=files::$files"
+      - id: files
+        uses: jitterbit/get-changed-files@v1
+      - run: |
+          for changed_file in ${{ steps.files.outputs.all }}; do
+            echo "Do something with this ${changed_file}."
+          done
       
       - name: Run Tool on Changed Files
         run: |
