@@ -78,6 +78,18 @@ jobs:
             }
         run: |
           node app --setup="${SETUP}" --ci="${CI}"
-
-      - name: Run ESLint
-        run: npx standard
+      
+      - name: Get list of Changed Files
+        id: getfile
+        run: |
+          files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+          echo "::set-output name=files::$files"
+      
+      - name: Run Tool on Changed Files
+        run: |
+          FILES="${{ steps.getfile.outputs.files }}"
+          
+          for file in $FILES; do
+            npx standard $file
+            echo "Changed file: $file"
+          done
