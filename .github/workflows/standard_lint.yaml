@@ -83,14 +83,8 @@ jobs:
         uses: jitterbit/get-changed-files@v1
       - run: |
           for changed_file in ${{ steps.files.outputs.all }}; do
-            echo "Do something with this ${changed_file}."
-          done
-      
-      - name: Run Tool on Changed Files
-        run: |
-          FILES="${{ steps.getfile.outputs.files }}"
-          
-          for file in $FILES; do
-            npx standard $file
-            echo "Changed file: $file"
+            if [[ $changed_file == *".js" ]]; then
+              npx standard ${changed_file}
+              echo "Lint ${changed_file}."
+            fi
           done
