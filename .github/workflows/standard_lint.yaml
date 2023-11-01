@@ -78,11 +78,19 @@ jobs:
             }
         run: |
           node app --setup="${SETUP}" --ci="${CI}"
+
+      - name: Get Base Branch Commit SHA
+        id: base_branch_commit
+        run: echo "::set-output name=sha::$(git rev-parse ${{ github.event.repository.default_branch }})"
+
+      - name: Display Base Branch Commit SHA
+        id: base_branch_sha
+        run: echo "Base Branch Commit SHA: ${{ steps.base_branch_commit.outputs.sha }}"
       
       - name: Get list of Changed Files
         id: getfile
         run: |
-          files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+          files=$(git diff --name-only ${{ steps.base_branch_sha }} ${{ github.sha }})
           echo "::set-output name=files::$files"
       
       - name: Run Tool on Changed Files
