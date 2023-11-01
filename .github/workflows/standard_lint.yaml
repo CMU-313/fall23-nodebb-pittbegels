@@ -78,6 +78,22 @@ jobs:
             }
         run: |
           node app --setup="${SETUP}" --ci="${CI}"
+
+      - name: Get Base Branch Commit SHA
+        id: base_branch_commit
+        run: echo "::set-output name=sha::$(git rev-parse ${{ github.event.repository.default_branch }})"
+
+      - name: Display Base Branch Commit SHA
+        id: base_branch_sha
+        run: echo "Base Branch Commit SHA ${{ steps.base_branch_commit.outputs.sha }}"
+
+      - name: Get Head Branch Commit SHA
+        id: head_branch_commit
+        run: echo "::set-output name=sha::$(git rev-parse HEAD)"
+
+      - name: Display Head Branch Commit SHA
+        id: head_branch_sha
+        run: echo "Head Branch Commit SHA ${{ steps.head_branch_commit.outputs.sha }}"
       
       - name: Get list of Changed Files
         id: getfile
