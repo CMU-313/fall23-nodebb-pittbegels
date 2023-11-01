@@ -82,7 +82,7 @@ jobs:
       - name: Get list of Changed Files
         id: getfile
         run: |
-          files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+          files=$(git diff --name-only ${{ github.base_ref }} ${{ github.head_ref }})
           echo "::set-output name=files::$files"
       
       - name: Run Tool on Changed Files
