@@ -80,4 +80,4 @@ jobs:
           node app --setup="${SETUP}" --ci="${CI}"
 
       - name: Run ESLint
-        run: npm run standard_lint
+        run: npx standard
