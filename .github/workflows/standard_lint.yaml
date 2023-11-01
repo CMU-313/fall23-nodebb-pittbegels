@@ -79,17 +79,5 @@ jobs:
         run: |
           node app --setup="${SETUP}" --ci="${CI}"
 
-      - name: Get list of Changed Files
-        id: getfile
-        run: |
-          files=$(git diff --name-only ${{ github.base_ref }} ${{ github.head_ref }})
-          echo "::set-output name=files::$files"
-      
-      - name: Run Tool on Changed Files
-        run: |
-          FILES="${{ steps.getfile.outputs.files }}"
-          
-          for file in $FILES; do
-            npm run standard_lint $file
-            echo "Changed file: $file"
-          done
+      - name: Run ESLint
+        run: npm run standard_lint
